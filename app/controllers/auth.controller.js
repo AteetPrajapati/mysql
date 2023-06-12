@@ -30,7 +30,7 @@ exports.login = async (req, res, next) => {
                     let jwtSecret = process.env.JWT_SECERT;
 
                     const token = jwt.sign(
-                        { id: user._id, email: user.email },
+                        { id: user.id, email: user.email },
                         jwtSecret
                     );
                     res.cookie("jwt", token, {

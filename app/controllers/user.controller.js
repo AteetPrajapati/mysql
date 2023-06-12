@@ -6,6 +6,7 @@ const RoleModel = require("../models/role.model");
 const PermissionModel = require("../models/permission.model");
 const jwt = require("jsonwebtoken");
 const RolesPermissions = require("../models/roles_permissions.model");
+const rcode = require("../utils/response-codes");
 
 exports.findAll = async (req, res) => {
     const users = await User.findAll({
@@ -65,3 +66,12 @@ exports.create = async (req, res) => {
         }
     })
 };
+
+exports.delete = async (req, res) => {
+    try {
+        await User.destroy({ where: { id: req.params.id } });
+        res.status(rcode.OK).send({ message: "User Deleted Succefully" })
+    } catch (error) {
+        res.status(rcode.BadRequest).send({ message: "Somethong went Wrong!!" })
+    }
+}

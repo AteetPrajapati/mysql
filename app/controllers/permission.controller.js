@@ -20,3 +20,12 @@ exports.findAll = async (req, res) => {
         res.send(error);
     }
 }
+
+exports.delete = async (req, res) => {
+    try {
+        await PermissionModel.destroy({ where: { id: req.params.id } });
+        res.status(rcode.OK).send({ message: "Permission Deleted Succefully" })
+    } catch (error) {
+        res.status(rcode.BadRequest).send({ message: "Something went Wrong!!" })
+    }
+}

@@ -4,6 +4,7 @@ const { permit } = require("../middlewares/permit");
 
 router.get("/", userController.findAll);
 router.get("/:id", userController.findAll);
+router.delete("/:id", userController.delete);
 router.post("/", permit.super_admin, userController.create);
 
 module.exports = router;
