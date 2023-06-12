@@ -15,7 +15,12 @@ exports.create = async (req, res) => {
 
 exports.findAll = async (req, res) => {
     try {
-        const userRoles = await RoleModel.findAll({ include: ['users', 'permissions'] });
+        const userRoles = await RoleModel.findAll({
+            where: {
+                ...(req.params.id && { "id": req.params.id }),
+            },
+            include: ['users', 'permissions']
+        });
         res.send(userRoles);
     } catch (error) {
         res.send(error);
